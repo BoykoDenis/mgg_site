@@ -12,26 +12,16 @@ class IndexView(generic.ListView):
     context_object_name = 'latest_question_list'
     
     def get_queryset(self):
-    """Return the last five published questions."""
+    #Return the last five published questions.
         return Question.objects.order_by('-pub_date')[:5]
     
 class DetailView(generic.DetailView):
-
     model = Question
     template_name = 'polls/detail.html'
 
 class ResultsView(generic.DetailView):
     model = Question
-    template = 'polls/relults.html'
-
-
-def detail(request, question_id):
-    question = get_object_or_404(Question, pk = question_id)
-    return render(request, 'polls/detail.html', {'question': question})
-
-def results(request, question_id):
-    question = get_object_or_404(Question, pk = question_id)
-    return render(request, 'polls/results.html', {'question' : question})
+    template_name = 'polls/results.html'
 
 def vote(request, question_id):
     question = get_object_or_404(Question, pk = question_id)
@@ -50,4 +40,3 @@ def vote(request, question_id):
         # with POST data. This prevents data from being posted twice if a
         # user hits the Back button.
         return HttpResponseRedirect(reverse('polls:results', args = (question_id,)))
-        #
