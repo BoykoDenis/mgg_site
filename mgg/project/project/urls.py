@@ -18,7 +18,7 @@ from django.urls import include, path
 
 urlpatterns = [
     path('polls/', include('polls.urls')),
-    path('image_gen', include('image_gen'))
+    path('image_gen/', include('image_gen.urls')),
     #links 'polls' to polls's url file
     path('admin/', admin.site.urls),
 ]
